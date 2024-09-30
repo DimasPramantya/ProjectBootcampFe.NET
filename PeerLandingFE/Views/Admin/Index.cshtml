@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_LayoutAdmin";
+}
+
+<div class="container">
+    <h2>Master Data User</h2>
+    <div class="mb-3">
+        <button class="btn btn-success" data-bs-toggle="modal" onclick="$('#addUserModal').modal('show')" data-bs-target="#addUserModal">Add User</button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="userTable">
+            <thead class="border-1">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- User data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example" class="flex justify-content-end">
+        <ul class="pagination justify-content-end"></ul>
+    </nav>
+
+
+    <!-- Modal Edit User -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <div class="mb-3">
+                            <label for="addUserName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="userName" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="userRole" class="form-label">Role</label>
+                            <select class="form-select" id="userRole" required>
+                                <option value="lender">Lender</option>
+                                <option value="borrower">Borrower</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userBalance" class="form-label">Balance</label>
+                            <input type="number" class="form-control" id="userBalance" required />
+                        </div>
+                        <input type="hidden" id="userId" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateUser()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add User -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm" oninput="validateForm('addUserForm', 'saveUserButton')">
+                    <div class="form-group">
+                        <label for="userName">Name</label>
+                        <input type="text" class="form-control" id="addUserName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="addUserEmail" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" value="Password1" class="form-control" id="addUserPassword" name="password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="addUserRole">Role</label>
+                        <select class="form-control" id="addUserRole" required>
+                            <option value="">Select Role</option>
+                            <option value="lender">Lender</option>
+                            <option value="borrower">Borrower</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveUserButton" onclick="addUser()" disabled>Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/mstuser.js"></script>
+<script src="~/js/util.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

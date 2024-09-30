@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Lender Dashboard";
+    Layout = "_LayoutLender";
+}
+<div class="container">
+    <h2 class="mb-3">Daftar Pengajuan Pinjaman</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped" id="loanTable">
+            <thead class="border-1">
+                <tr>
+                    <th>No</th>
+                    <th>Nama Peminjam</th>
+                    <th>Jumlah Pinjaman</th>
+                    <th>Status</th>
+                    <th>Suku Bunga</th>
+                    <th>Tanggal Pengajuan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example" class="flex justify-content-end">
+        <ul class="pagination justify-content-end"></ul>
+    </nav>
+</div>
+
+
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Pendanaan</h5>
+                <button type="button" class="close border-0 bg-white" data-dismiss="modal" aria-label="Close" onclick="closeConfirmationModal()">
+                    <span class="" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin mendanai pinjaman ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeConfirmationModal()" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="fundLoan()" id="confirmButton">Terima</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/lender/loan.js"></script>
+<script src="~/js/util.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function closeConfirmationModal(){
+        $('#confirmationModal').modal('hide');
+    }
+</script>

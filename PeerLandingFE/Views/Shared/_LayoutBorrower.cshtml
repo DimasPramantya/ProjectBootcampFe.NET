@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PeerLandingFE</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PeerLandingFE.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+        <div class="container-fluid ps-2 pe-0">
+            <button class="btn btn-sm" id="toggleSidebar" aria-label="Toggle Sidebar">
+                <span class="navbar-toggler-icon"></span> <!-- Hamburger icon -->
+            </button>
+            <span class="navbar-brand ms-2">Peer to Peer Landing</span>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto p-0 px-3">
+                    <!-- Profile and Logout Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link d-flex align-items-center justify-content-center p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle" style="font-size: 2rem; margin-right: 10px;"></i> <!-- Bootstrap Icon -->
+                            <div class="text-start">
+                                <div id="profileName" class="fw-bold">User</div>
+                                <div id="profileRole" class="text-muted small">Admin</div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/Borrower/UserProfile">Profile</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar p-3" id="sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Borrower">Pengajuan Pinjaman</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Borrower/LoanHistory">Riwayat Pinjaman</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex-grow-1">
+            <div class="main-content container">
+                <main role="main">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        const userName = localStorage.getItem('userName');
+        const admin = localStorage.getItem('userRole');
+        document.getElementById('profileName').textContent = userName;
+        document.getElementById('profileRole').textContent = admin;
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userRole');
+            window.location.href = '/Login';
+        });
+        document.getElementById('toggleSidebar').addEventListener('click', function () {
+            console.log("toggeled");
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('visually-hidden');
+        });
+    </script>
+</body>
+</html>

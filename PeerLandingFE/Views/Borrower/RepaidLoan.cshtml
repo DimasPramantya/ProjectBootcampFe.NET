@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Cicilan Pinjaman";
+    Layout = "_LayoutBorrower";
+}
+<div class="container">
+    <h2>Daftar Cicilan Pinjaman</h2>
+    <div class="d-flex justify-content-between mb-3">
+        <div class="form-group w-25">
+            <select class="form-control" id="opsiStatusPinjaman" onchange="fetchLoanRepayment(loanId, 1, 12, this.value)" required>
+                <option value="all">Semua Status</option>
+                <option value="unpaid">Unpaid</option>
+                <option value="paid">Paid</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="alert-container"></div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Jumlah</th>
+                <th>Tanggal Jatuh Tempo</th>
+                <th>Tanggal Dilunasi</th>
+                <th>Status</th>
+                <th>Tanggal Dibuat</th>
+                <th>Pilih</th>
+            </tr>
+        </thead>
+        <tbody id="repayments-table-body">
+        </tbody>
+    </table>
+
+    <div class="text-end mb-3">
+        <button class="btn btn-primary" id="payButton">Pay Selected</button>
+    </div>
+
+    <nav aria-label="Page navigation example" class="flex justify-content-end">
+        <ul class="pagination justify-content-end"></ul>
+    </nav>
+</div>
+
+<script>
+    var loanId = '@ViewData["LoanId"]';
+</script>
+<script src="~/js/borrower/repayment.js"></script>
+<script src="~/js/util.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

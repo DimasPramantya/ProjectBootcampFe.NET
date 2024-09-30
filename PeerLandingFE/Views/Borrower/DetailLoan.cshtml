@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Detail Pinjaman";
+    Layout = "_LayoutBorrower";
+}
+<div class="container pt-3">
+    <h2 class="mb-4">Loan Details</h2>
+
+    <div id="alert-container"></div>
+
+    <div class="card">
+        <div class="card-header">
+            Loan Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title">Loan ID: <span id="loan-id"></span></h5>
+                    <p class="card-text">Amount: <span id="amount"></span></p>
+                    <p class="card-text">Interest Rate: <span id="interest-rate"></span>%</p>
+                    <p class="card-text">Total Repaid: <span id="total-repaid"></span></p>
+                    <p class="card-text">Duration: <span id="duration"></span> months</p>
+                    <p class="card-text">Status: <span id="status"></span></p>
+                    <p class="card-text">Created At: <span id="created-at"></span></p>
+                    <p class="card-text">Updated At: <span id="updated-at"></span></p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-title">Borrower Information</h5>
+                    <p class="card-text">Name: <span id="borrower-name"></span></p>
+                    <p class="card-text">Role: <span id="borrower-role"></span></p>
+
+                    <h5 class="card-title mt-4">Lender Information</h5>
+                    <p class="card-text">Name: <span id="lender-name"></span></p>
+                    <p class="card-text">Role: <span id="lender-role"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var loanId = '@ViewData["LoanId"]';
+</script>
+<script src="~/js/borrower/detailLoan.js"></script>
+<script src="~/js/util.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

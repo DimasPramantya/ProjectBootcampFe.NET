@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Borrower Dashboard";
+    Layout = "_LayoutBorrower";
+}
+<div class="container">
+    <h2>Daftar Pengajuan Pinjaman</h2>
+    <div class="d-flex justify-content-between mb-3">
+        <div class="form-group w-25">
+            <select class="form-control" id="opsiStatusPinjaman" required>
+                <option value="all">Semua Status</option>
+                <option value="requested">Requested</option>
+                <option value="funded">Funded</option>
+                <option value="repaid">Repaid</option>
+            </select>
+        </div>
+        <button class="btn btn-success" data-bs-toggle="modal" onclick="$('#addLoanModal').modal('show')" data-bs-target="#addLoan">
+            <i class="bi bi-plus-circle"></i> Tambah Pinjaman
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped" id="loanTable">
+            <thead class="border-1">
+                <tr>
+                    <th>No</th>
+                    <th>Jumlah Pinjaman</th>
+                    <th>Status</th>
+                    <th>Pemberi Pinjaman</th>
+                    <th>Tanggal Pengajuan</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example" class="flex justify-content-end">
+        <ul class="pagination justify-content-end"></ul>
+    </nav>
+</div>
+
+<!-- Modal Add Pinjaman -->
+<div class="modal fade" id="addLoanModal" tabindex="-1" role="dialog" aria-labelledby="addLoanLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModalLabel">Ajukan Pinjaman</h5>
+            </div>
+            <div class="modal-body">
+                <form id="addLoanForm" oninput="validateForm('addLoanForm', 'saveLoanButton')">
+                    <div class="form-group">
+                        <label for="amount">Jumlah Pinjaman</label>
+                        <input type="number" class="form-control" id="loanAmount" min="0" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="interestRate" >Suku Bunga (%)</label>
+                        <input type="number" class="form-control" id="loanInterestRate" min="0" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="duration" class="form-label">Durasi</label>
+                        <input type="text" value="12 Bulan" class="form-control" id="duration" name="duration" disabled/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveLoanButton" onclick="addLoan()" disabled>Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+<script src="~/js/borrower/loan.js"></script>
+<script src="~/js/util.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
